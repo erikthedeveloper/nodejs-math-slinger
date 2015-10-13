@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
-    "develop": "mocha --watch"
+    "start": "node app.js",
+    "test": "NODE_ENV=test mocha",
+    "develop": "NODE_ENV=test mocha --watch"
   },
   "keywords": [],
   "author": "",
