@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "test": "NODE_ENV=test mocha",
-    "develop": "NODE_ENV=test mocha --watch"
+    "develop": "NODE_ENV=test mocha --watch",
+    "simulation": "npm run start & node spawn_bot.js BillBot & node spawn_bot.js JaneBot"
   },
   "keywords": [],
   "author": "",
