@@ -12,8 +12,11 @@
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.3.0",
-    "mocha": "^2.3.3"
+    "mocha": "^2.3.3",
+    "sinon": "^1.17.1",
+    "supertest": "^1.1.0"
   },
   "dependencies": {
+    "connect": "^3.4.0"
   }
 }
