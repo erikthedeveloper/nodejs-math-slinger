@@ -24,9 +24,8 @@ describe('Math Evaluator Service [integration]', function () {
       assertRequestsFail([
         // Requires "="
         '1+3',
-        // Only supports addition
-        '1-2=',
-        '1+2-3=',
+        // No support for negative numbers
+        '-1+3=',
         // Garbage, empty, etc...
         'Just plain garbage...',
         ''
