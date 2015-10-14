@@ -42,6 +42,7 @@ app.listen('/math', [
 
 /**
  * POST /evaluate (body='1+2=')
+ * @deprecated TODO: Remove this and all accompanying cruft in favor of simplified GET /math route
  */
 app.listen('/evaluate', [
   mw.enforceMethod('POST'),

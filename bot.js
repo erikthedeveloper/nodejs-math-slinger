@@ -28,17 +28,6 @@ function bot(options) {
       this.log(`REQUEST: ${expression}`);
     },
 
-    /**
-     * HTTP POST request
-     * @param uri
-     * @param data
-     * @param callback
-     */
-    post(uri, data, callback) {
-      var req = this.request({path: uri, method: 'POST'}, callback);
-      req.end(data);
-    },
-
     get(uri, data, callback) {
       var fullUri = uri + '?' + require('querystring').stringify(data);
       var req = this.request({path: fullUri, method: 'GET'}, callback);
