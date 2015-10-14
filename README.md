@@ -10,6 +10,21 @@ The MathAsker sends a series of random arithmetic expressions to the MathAnswere
 - The MathAnswerer successfully processing requests from two MathAskers concurrently at a rate of at least 1 req/sec from each MathAsker (2 req/sec in aggregate)
 - The MathAnswerer and MathAsker should log all messages they generate and receive
 
+#### Endpoints
+
+- `GET /math?expression={encodeURIComponent('1+2=')}`
+- `POST /evaluate (body='1+2=')`
+
+Both return "3"
+
+#### Supported Operations
+
+- `+` Addition
+- `-` Subtraction
+- `*` Multiplication
+- `/` Division
+- `^` Exponents
+
 ## Installation/Requirements
 
 - Requires node.js v4.x (for ease of node version management I've found [nvm](https://github.com/creationix/nvm) to be :+1:)
@@ -33,6 +48,51 @@ npm install
 `npm test` will set `NODE_ENV=test` and run all tests.
 
 ![image](https://cloud.githubusercontent.com/assets/1240178/10477586/8696f3e0-7214-11e5-9eec-30d5957e03ac.png)
+
+```
+Math Evaluator Service [integration]
+    GET /math
+      ✓ expects expression in query string
+      ✓ should accept and evaluate a basic addition expression
+      ✓ should accept and evaluate a lengthy addition expression
+      ✓ should reject invalid expressions
+    POST /evaluate
+      ✓ should accept and evaluate a basic addition expression
+      ✓ should accept and evaluate a lengthy addition expression
+      ✓ should reject invalid expressions
+
+  MathBot - Requester of Mathematical Solutions
+    ✓ Accepts options and is humanized via "name"
+    ✓ should request a "solution" to an "expression" via HTTP "/evaluate"
+
+  expressionEvaluator
+    #validateExpression
+      ✓ should pass for a simple addition expression
+      ✓ should pass for a simple subtraction expression
+      ✓ should enforce the ending "="
+      ✓ should not allow any whitespace
+    #evaluateExpression
+      ✓ evaluates simple addition expressions
+      ✓ evaluates addition/substraction expressions
+      ✓ evaluates multiplication/division expressions
+      ✓ evaluates exponent expressions
+
+  expressionGenerator
+    #randomExpression
+      ✓ should generate a random, simple addition expression
+      ✓ should allow specifying count of numbers involved (length)
+
+  Infix to Postfix Converter
+    ✓ Should convert simple addition
+    ✓ should convert all sorts of infix goodies to postfix...
+    ✓ should reject expressions containing negative numbers
+
+  Postfix Evaluator
+    ✓ does math
+
+
+  23 passing (83ms)
+```
 
 ## UML Diagrams
 
