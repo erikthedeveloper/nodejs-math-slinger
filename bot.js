@@ -24,7 +24,7 @@ function bot(options) {
      * @param {function} callback
      */
     askMath(expression, callback) {
-      this.post('/evaluate', expression, callback);
+      this.get('/math', {expression}, callback);
       this.log(`REQUEST: ${expression}`);
     },
 
@@ -37,6 +37,12 @@ function bot(options) {
     post(uri, data, callback) {
       var req = this.request({path: uri, method: 'POST'}, callback);
       req.end(data);
+    },
+
+    get(uri, data, callback) {
+      var fullUri = uri + '?' + require('querystring').stringify(data);
+      var req = this.request({path: fullUri, method: 'GET'}, callback);
+      req.end();
     },
 
     /**

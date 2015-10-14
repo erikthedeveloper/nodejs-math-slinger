@@ -32,7 +32,6 @@ describe('MathBot - Requester of Mathematical Solutions', function() {
   it('should request a "solution" to an "expression" via HTTP "/evaluate"', function(done) {
     var expression = '1+1=';
     var expectedSolution = '2';
-    var spyRequestWrite = sinon.spy(dummyRequest, 'write');
 
     dummyResponse.end(expectedSolution);
 
@@ -41,8 +40,12 @@ describe('MathBot - Requester of Mathematical Solutions', function() {
       .returns(dummyRequest);
 
     bot({client: http}).askMath(expression, function(solution) {
+      var fullUri = '/math' + '?' + require('querystring').stringify({expression});
+      var requestOptions = stubbedRequest.args[0][0];
       expect(solution).to.equal(expectedSolution, 'Expected solution {string} read from response Stream');
-      sinon.assert.calledWith(spyRequestWrite, expression);
+      expect(requestOptions).to.have.property('path', fullUri);
+      expect(requestOptions).to.have.property('method', 'GET');
+
       done();
     });
   });

@@ -5,6 +5,15 @@ var app = server();
 
 describe('Math Evaluator Service [integration]', function () {
 
+  describe('GET /math', function() {
+    it('expects expression in query string', function (done) {
+      request(app)
+        .get('/math')
+        .query({expression: '2+3='})
+        .expect(200, '5', done);
+    });
+  });
+
   describe('POST /evaluate', function () {
     it('should accept and evaluate a basic addition expression', function (done) {
       request(app)
