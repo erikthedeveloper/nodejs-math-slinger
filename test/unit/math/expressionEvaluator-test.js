@@ -1,9 +1,9 @@
 'use strict';
 var expect = require('chai').expect;
+var evaluator = require('./../../../lib/math/expressionEvaluator');
 
 describe('expressionEvaluator', function () {
 
-  var evaluator = require('./../../../lib/math/expressionEvaluator');
 
   describe('#validateExpression', function () {
     var validate = evaluator.validateExpression;
@@ -13,10 +13,10 @@ describe('expressionEvaluator', function () {
       ).to.be.true;
     });
 
-    it('should fail for a simple subtraction expression', function () {
+    it('should pass for a simple subtraction expression', function () {
       expect(
         validate('2+3-13=')
-      ).to.be.false;
+      ).to.be.true;
     });
 
     it('should enforce the ending "="', function () {
@@ -49,6 +49,40 @@ describe('expressionEvaluator', function () {
       );
     });
 
-    //it('throws...')
+    it('evaluates addition/substraction expressions', function () {
+      [
+        ['2+3-1=', 4],
+        ['1+3-2=', 2],
+        ['20-10+5=', 15],
+      ].forEach(pair =>
+        expect(
+          evaluate(pair[0])
+        ).to.equal(pair[1], 'For: ' + pair[0])
+      );
+    });
+
+    it('evaluates multiplication/division expressions', function () {
+      [
+        ['2*2=', 4],
+        ['2*3*4=', 24],
+        ['2*10/5=', 4],
+      ].forEach(pair =>
+        expect(
+          evaluate(pair[0])
+        ).to.equal(pair[1], 'For: ' + pair[0])
+      );
+    });
+
+    it('evaluates exponent expressions', function () {
+      [
+        ['2^10=', 1024],
+        ['2+4^4=', 258]
+      ].forEach(pair =>
+        expect(
+          evaluate(pair[0])
+        ).to.equal(pair[1], 'For: ' + pair[0])
+      );
+    });
+
   });
 });
