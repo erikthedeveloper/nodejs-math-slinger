@@ -1,14 +1,14 @@
 # MathSlinger
 
-A simple MathAsker/MathAnswerer system. 
+A simple Producer/Consumer system.
 
-The MathAsker sends a series of random arithmetic expressions to the MathAnswerer, which will compute the results.
+The MathAsker (Generator) sends a series of random arithmetic expressions to the MathAnswerer (Consumer), which will compute the results.
 
 - The MathAsker and MathAnswerer are separate NodeJS services
-- The MathAsker generating random addition expressions of two positive integers, e.g. "2+3="
-- The MathAnswerer computing and returning the correct mathematical result for the each expression it receives
-- The MathAnswerer successfully processing requests from two MathAskers concurrently at a rate of at least 1 req/sec from each MathAsker (2 req/sec in aggregate)
-- The MathAnswerer and MathAsker should log all messages they generate and receive
+- The MathAsker generating random mathematical expressions of varying difficulty and length, e.g. `2+3=`, `37-90*2=`, `3^2+64-2/4-80+40=`
+- The MathAnswerer computes and returns the correct mathematical result for the each expression it receives
+- The MathAnswerer successfully processes requests from two MathAskers concurrently at a rate of at least 1 req/sec from each MathAsker (2 req/sec in aggregate)
+- The MathAnswerer and MathAsker log all messages they generate and receive
 
 #### Endpoints
 
@@ -42,6 +42,20 @@ npm install
 `npm run simulation` will start the server **and** spawn two bots (3 separate processes). The bots will procede to request solutions to randomly generated mathematical solutions of varying difficulties.
 
 ![image](https://cloud.githubusercontent.com/assets/1240178/10477503/e7edbef4-7213-11e5-98b5-518cfd3be636.png)
+
+## Next Steps
+
+- [ ] :scissors: :fire: :scissors: code for POST /evaluate in favor of GET /math (simplicity)
+- [ ] Refactor. Refactor. Refactor.
+- [ ] Support parenthesis in equations (i.e. `(2*(3+4)/4)-(2^2/(4*20)=`)
+- [ ] Respond w/ JSON
+- [ ] ESLint
+- [ ] Refactor. Refactor. Refactor.
+- [ ] Web Client w/ React (Calculator)
+- [ ] Node v0.12.x branch via Babel/Webpack
+- [ ] ES6+ branch via Babel/Webpack :)
+- [ ] Refactor. Refactor. Refactor.
+- [ ] Deploy
 
 ## Run Tests
 
