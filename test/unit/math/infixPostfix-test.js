@@ -4,11 +4,6 @@ var infixPostfix = require('./../../../lib/math/infixPostfix');
 
 describe('Infix to Postfix Converter', function () {
 
-  var assertPostfix = (expected, infix) => assert.equal(
-    expected,
-    infixPostfix.toPostfix(infix)
-  );
-
   it('Should convert simple addition', function () {
     assert.equal(infixPostfix.toPostfix('x+2+9'), 'x 2 + 9 +');
   });
