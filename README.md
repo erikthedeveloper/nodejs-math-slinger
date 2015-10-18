@@ -2,7 +2,7 @@
 
 A simple Producer/Consumer system.
 
-The MathAsker (Generator) sends a series of random arithmetic expressions to the MathAnswerer (Consumer), which will compute the results.
+The MathAsker (Producer) sends a series of random arithmetic expressions to the MathAnswerer (Consumer), which will compute the results.
 
 - The MathAsker and MathAnswerer are separate NodeJS services
 - The MathAsker generating random mathematical expressions of varying difficulty and length, e.g. `2+3=`, `37-90*2=`, `3^2+64-2/4-80+40=`
@@ -13,9 +13,6 @@ The MathAsker (Generator) sends a series of random arithmetic expressions to the
 #### Endpoints
 
 - `GET /math?expression={encodeURIComponent('1+2=')}`
-- `POST /evaluate (body='1+2=')`
-
-Both return "3"
 
 #### Supported Operations
 
@@ -45,11 +42,11 @@ npm install
 
 ## Next Steps
 
-- [ ] :scissors: :fire: :scissors: code for POST /evaluate in favor of GET /math (simplicity)
-- [ ] Refactor. Refactor. Refactor.
+- [x] :scissors: :fire: :scissors: code for POST /evaluate in favor of GET /math (simplicity)
+- [x] Refactor. Refactor. Refactor.
 - [ ] Support parenthesis in equations (i.e. `(2*(3+4)/4)-(2^2/(4*20)=`)
 - [ ] Respond w/ JSON
-- [ ] ESLint
+- [x] ESLint
 - [ ] Refactor. Refactor. Refactor.
 - [ ] Web Client w/ React (Calculator)
 - [ ] Node v0.12.x branch via Babel/Webpack
@@ -59,21 +56,22 @@ npm install
 
 ## Run Tests
 
-`npm test` will set `NODE_ENV=test` and run all tests.
+`npm test` sets `NODE_ENV=test` and runs all tests.
+`npm test -- --watch` runs tests and watches files for changes.
+`npm run lint` will lint the project using [ESLint](http://eslint.org/) and the rules defined in `.eslintrc`.
 
 ![image](https://cloud.githubusercontent.com/assets/1240178/10477586/8696f3e0-7214-11e5-9eec-30d5957e03ac.png)
 
 ```
-Math Evaluator Service [integration]
+  Math Evaluator Service [integration]
     GET /math
       ✓ expects expression in query string
       ✓ should accept and evaluate a basic addition expression
       ✓ should accept and evaluate a lengthy addition expression
       ✓ should reject invalid expressions
-    POST /evaluate
-      ✓ should accept and evaluate a basic addition expression
-      ✓ should accept and evaluate a lengthy addition expression
-      ✓ should reject invalid expressions
+      ✓ should only accept GET requests
+    POST /evaluate @deprecated
+      ✓ should return 404 NOT FOUND
 
   MathBot - Requester of Mathematical Solutions
     ✓ Accepts options and is humanized via "name"
@@ -103,9 +101,6 @@ Math Evaluator Service [integration]
 
   Postfix Evaluator
     ✓ does math
-
-
-  23 passing (83ms)
 ```
 
 ## UML Diagrams
