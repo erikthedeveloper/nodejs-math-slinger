@@ -56,9 +56,9 @@ npm install
 
 ## Run Tests
 
-`npm test` sets `NODE_ENV=test` and runs all tests.
-`npm test -- --watch` runs tests and watches files for changes.
-`npm run lint` will lint the project using [ESLint](http://eslint.org/) and the rules defined in `.eslintrc`.
+- `npm test` sets `NODE_ENV=test` and runs all tests.
+- `npm test -- --watch` runs tests and watches files for changes.
+- `npm run lint` will lint the project using [ESLint](http://eslint.org/) and the rules defined in `.eslintrc`.
 
 ![image](https://cloud.githubusercontent.com/assets/1240178/10477586/8696f3e0-7214-11e5-9eec-30d5957e03ac.png)
 
