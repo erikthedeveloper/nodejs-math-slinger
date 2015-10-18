@@ -6,8 +6,7 @@ var respond = require('./lib/util/http').respond;
 var log = require('./lib/util/log');
 var evalutor = require('./lib/math/expressionEvaluator');
 
-var queryString = require('querystring');
-var url = require('url');
+const ensureArray = item => Array.isArray(item) ? item : [item];
 
 var app = Object.assign(connect(), {
   /**
@@ -15,30 +14,34 @@ var app = Object.assign(connect(), {
    * @param {Function|Array} middlewares
    */
   listen(uri, middlewares) {
-    if (!Array.isArray(middlewares)) middlewares = [middlewares];
-    middlewares.forEach(middleware => this.use(uri, middleware));
+    ensureArray(middlewares).forEach(middleware => this.use(uri, middleware));
+  },
+
+  /**
+   * Listen for GET requests at `uri`
+   * @param {String} uri
+   * @param {Function|Array} middlewares
+   */
+  get(uri, middlewares) {
+    this.listen(uri, [
+      mw.enforceMethod('GET'),
+      mw.queryString,
+    ].concat(ensureArray(middlewares)));
   }
 });
 
 /**
  * GET /math?expression={encodeURIComponent('1+2=')}
  */
-app.listen('/math', [
-  mw.enforceMethod('GET'),
-  (req, res, next) => {
-    req.query = url.parse(req.url, true).query;
-    log('SERVER - INCOMING REQUEST: ' + req.query.expression);
-    next();
-  },
-  (req, res) => {
-    var expression = req.query.expression;
-    if (!evalutor.validateExpression(expression)) {
-      res.statusCode = 400;
-      return respond(res, 'Invalid expressionz!');
-    }
-    return respond(res, evalutor.evaluateExpression(expression));
+app.get('/math', function(req, res) {
+  var expression = req.query.expression;
+  log('SERVER - INCOMING REQUEST: ' + req.query.expression);
+  if (!evalutor.validateExpression(expression)) {
+    res.statusCode = 400;
+    return respond(res, 'Invalid expression!');
   }
-]);
+  return respond(res, evalutor.evaluateExpression(expression));
+});
 
 module.exports = function() {
   return http.createServer(app);
