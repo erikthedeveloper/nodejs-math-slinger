@@ -54,6 +54,14 @@ describe('Math Evaluator Service [integration]', function () {
           })
       }
     });
+
+    it('should only accept GET requests', function (done) {
+      request(app)
+        .post('/math')
+        .send('2+3=')
+        .expect(400, /GET/, done);
+    });
+
   });
 
   /**
