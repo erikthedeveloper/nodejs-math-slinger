@@ -8,7 +8,7 @@ startAsking(
 );
 
 function startAsking(bot, interval) {
-  var intervalId = setInterval(function () {
+  setInterval(function () {
     var expression = randomExpression();
     bot.askMath(expression, function(solution) {
       bot.log(`SOLUTION: ${expression}${solution}`);
