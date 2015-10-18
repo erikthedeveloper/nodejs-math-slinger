@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "test": "NODE_ENV=test mocha",
-    "lint": "eslint .",
+    "lint": "eslint .; true;",
     "simulation": "npm run start & node spawn_bot.js BillBot & node spawn_bot.js JaneBot"
   },
   "keywords": [],
