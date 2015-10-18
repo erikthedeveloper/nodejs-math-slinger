@@ -40,29 +40,6 @@ app.listen('/math', [
   }
 ]);
 
-/**
- * POST /evaluate (body='1+2=')
- * @deprecated TODO: Remove this and all accompanying cruft in favor of simplified GET /math route
- */
-app.listen('/evaluate', [
-  mw.enforceMethod('POST'),
-  mw.stringBodyMiddleware,
-  mw.logIncomingMiddleware,
-  evaluateHandler,
-]);
-
-/**
- * POST /evaluate
- */
-function evaluateHandler(req, res) {
-  if (!evalutor.validateExpression(req.body)) {
-    res.statusCode = 400;
-    return respond(res, 'Invalid expression!');
-  }
-
-  return respond(res, evalutor.evaluateExpression(req.body));
-}
-
 module.exports = function() {
   return http.createServer(app);
 };
