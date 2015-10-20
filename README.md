@@ -2,6 +2,8 @@
 
 A simple Producer/Consumer system.
 
+_Also work-in-progress [React](https://facebook.github.io/react/index.html) client (see `react-client/` subdirectory)_
+
 The MathAsker (Producer) sends a series of random arithmetic expressions to the MathAnswerer (Consumer), which will compute the results.
 
 - The MathAsker and MathAnswerer are separate NodeJS services
