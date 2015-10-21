@@ -19,6 +19,21 @@ describe('expressionEvaluator', function () {
       ).to.be.true;
     });
 
+    it('should pass for an expression containing parentheses', function () {
+      expect(
+        validate('2*(12-10)=')
+      ).to.be.true;
+    });
+
+    it('should fail for an expression containing unclosed/mismatched parentheses', function () {
+      expect(
+        validate('2*(12-10=')
+      ).to.be.false;
+      expect(
+        validate('2+(4+4)+4)(=')
+      ).to.be.false;
+    });
+
     it('should enforce the ending "="', function () {
       expect(
         validate('2+3+13')
