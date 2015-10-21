@@ -5,7 +5,7 @@ var sinon = require('sinon');
 var http = require('http');
 var PassThrough = require('stream').PassThrough;
 
-var bot = require('./../../bot');
+var bot = require('./../../lib/bots/math-bot');
 
 describe('MathBot - Requester of Mathematical Solutions', function() {
   var stubbedRequest;

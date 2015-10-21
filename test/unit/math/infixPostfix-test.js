@@ -16,6 +16,11 @@ describe('Infix to Postfix Converter', function () {
     assert.equal(infixPostfix.toPostfix('1*2^3+4'), '1 2 3 ^ * 4 +');
   });
 
+  it('should convert infix expressions containing parentheses to postfix...', function() {
+    assert.equal(infixPostfix.toPostfix('1*(2+3)'), '1 2 3 + *');
+    assert.equal(infixPostfix.toPostfix('7-x*(3*x)/4'), '7 x 3 x * * 4 / -');
+  });
+
   it('should reject expressions containing negative numbers', function() {
     assert.throws(infixPostfix.toPostfix.bind(null, '-3+4'));
   });
@@ -23,7 +28,8 @@ describe('Infix to Postfix Converter', function () {
 });
 
 describe('Postfix Evaluator', function () {
-  it('does math', function() {
+  it('Evaluates postfix mathematical expressions', function() {
+    assert.equal(infixPostfix.evaluatePostfix('3 1 -'), 2);
     assert.equal(infixPostfix.evaluatePostfix('3 4 5 * +'), 23);
     assert.equal(infixPostfix.evaluatePostfix('8 4 2 / -'), 6);
     assert.equal(infixPostfix.evaluatePostfix('1 2 3 ^ * 4 +'), 12);
