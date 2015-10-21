@@ -99,5 +99,16 @@ describe('expressionEvaluator', function () {
       );
     });
 
+    it('evaluates expressions containing parentheses', function () {
+      [
+        ['10*(5-3)=', 20],
+        ['100/(2*(10/5))=', 25]
+      ].forEach(pair =>
+        expect(
+          evaluate(pair[0])
+        ).to.equal(pair[1], 'For: ' + pair[0])
+      );
+    });
+
   });
 });
