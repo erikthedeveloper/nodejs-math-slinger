@@ -23,10 +23,11 @@ The MathAsker (Producer) sends a series of random arithmetic expressions to the 
 - `*` Multiplication
 - `/` Division
 - `^` Exponents
+- `(` and `)` Parentheses
 
 ## Installation/Requirements
 
-- Requires node.js v4.x (for ease of node version management I've found [nvm](https://github.com/creationix/nvm) to be :+1:)
+- :warning: **Requires node.js v4.x** (for node version management I've found [nvm](https://github.com/creationix/nvm) to be :+1:)
 
 ```
 git clone https://github.com/erikthedeveloper/nodejs-math-slinger.git
@@ -46,11 +47,11 @@ npm install
 
 - [x] :scissors: :fire: :scissors: code for POST /evaluate in favor of GET /math (simplicity)
 - [x] Refactor. Refactor. Refactor.
-- [ ] Support parenthesis in equations (i.e. `(2*(3+4)/4)-(2^2/(4*20)=`)
+- [x] Support parenthesis in equations (i.e. `(2*(3+4)/4)-(2^2/(4*20)=`)
 - [ ] Respond w/ JSON
 - [x] ESLint
-- [ ] Refactor. Refactor. Refactor.
-- [ ] Web Client w/ React (Calculator)
+- [x] Refactor. Refactor. Refactor.
+- [x] Web Client w/ React (Calculator) _90% complete%_
 - [ ] Node v0.12.x branch via Babel/Webpack
 - [ ] ES6+ branch via Babel/Webpack :)
 - [ ] Refactor. Refactor. Refactor.
@@ -61,8 +62,6 @@ npm install
 - `npm test` sets `NODE_ENV=test` and runs all tests.
 - `npm test -- --watch` runs tests and watches files for changes.
 - `npm run lint` will lint the project using [ESLint](http://eslint.org/) and the rules defined in `.eslintrc`.
-
-![image](https://cloud.githubusercontent.com/assets/1240178/10477586/8696f3e0-7214-11e5-9eec-30d5957e03ac.png)
 
 ```
   Math Evaluator Service [integration]
@@ -83,6 +82,8 @@ npm install
     #validateExpression
       ✓ should pass for a simple addition expression
       ✓ should pass for a simple subtraction expression
+      ✓ should pass for an expression containing parentheses
+      ✓ should fail for an expression containing unclosed/mismatched parentheses
       ✓ should enforce the ending "="
       ✓ should not allow any whitespace
     #evaluateExpression
@@ -90,6 +91,7 @@ npm install
       ✓ evaluates addition/substraction expressions
       ✓ evaluates multiplication/division expressions
       ✓ evaluates exponent expressions
+      ✓ evaluates expressions containing parentheses
 
   expressionGenerator
     #randomExpression
@@ -99,10 +101,11 @@ npm install
   Infix to Postfix Converter
     ✓ Should convert simple addition
     ✓ should convert all sorts of infix goodies to postfix...
+    ✓ should convert infix expressions containing parentheses to postfix...
     ✓ should reject expressions containing negative numbers
 
   Postfix Evaluator
-    ✓ does math
+    ✓ Evaluates postfix mathematical expressions
 ```
 
 ## UML Diagrams
