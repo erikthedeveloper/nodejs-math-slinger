@@ -1,27 +1,19 @@
 'use strict';
-var expect = require('chai').expect;
+var assert = require('chai').assert;
 
-describe('expressionGenerator', function () {
+describe('expressionGenerator', function() {
 
-  var generator = require('./../../../lib/math/expressionGenerator');
+  var randomExpression = require('./../../../lib/math/expressionGenerator').randomExpression;
 
-  describe('#randomExpression', function () {
-    it('should generate a random, simple addition expression', function () {
-      expect(
-        generator.randomExpression()
-      ).to.match(/^[0-9+\-*/^]+\=$/);
+  describe('#randomExpression', function() {
+    it('should generate a random, simple addition expression', function() {
+      assert.match(randomExpression(), /^[0-9+\-*/^]+\=$/);
     });
 
-    it('should allow specifying count of numbers involved (length)', function () {
-      expect(
-        generator.randomExpression(3)
-      ).to.match(/^([0-9]+[+\-*/^]?){3}\=$/);
-      expect(
-        generator.randomExpression(6)
-      ).to.match(/^([0-9]+[+\-*/^]?){6}\=$/);
-      expect(
-        generator.randomExpression(1)
-      ).to.match(/^([0-9]+[+\-*/^]?){1}\=$/);
+    it('should allow specifying count of numbers involved (length)', function() {
+      assert.match(randomExpression(3), /^([0-9]+[+\-*/^]?){3}\=$/);
+      assert.match(randomExpression(6), /^([0-9]+[+\-*/^]?){6}\=$/);
+      assert.match(randomExpression(1), /^([0-9]+[+\-*/^]?){1}\=$/);
     });
   });
 });
