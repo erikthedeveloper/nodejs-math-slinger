@@ -1,5 +1,5 @@
 'use strict';
-var bot = require('./bot');
+var bot = require('./lib/bots/math-bot');
 var randomExpression = require('./lib/math/expressionGenerator').randomExpression;
 
 startAsking(
